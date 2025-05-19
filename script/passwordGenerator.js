@@ -1,6 +1,6 @@
 const userArguments = process.argv.slice(2);
 
-// --- HELP FLAG HANDLER ---
+// Help flag handler
 if (userArguments.includes('--help')) {
     console.log(`
 Usage: node passwordGenerator.js [options]
@@ -16,7 +16,7 @@ Options:
     process.exit(0);
 }
 
-// --- PASSWORD GENERATOR FUNCTION ---
+// Password generator function
 function generatePassword(length, useLowercase, useUppercase, useNumbers, useSymbols) {
     const lowercaseChars = 'abcdefghijklmnopqrstuvwxyz';
     const uppercaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -45,7 +45,7 @@ function generatePassword(length, useLowercase, useUppercase, useNumbers, useSym
     return { password, useLowercase, useUppercase, useNumbers, useSymbols };
 }
 
-// --- PASSWORD STRENGTH CHECKER ---
+// Password strength checker
 function getPasswordStrength(password) {
     let strength = 0;
 
@@ -66,13 +66,13 @@ function getPasswordStrength(password) {
     return '🧊 Weak';
 }
 
-// --- PASSWORD ENTROPY CALCULATOR ---
+// Password entropy calculator
 function calculateEntropy(length, charsetSize) {
     const entropy = Math.log2(Math.pow(charsetSize, length));
     return entropy.toFixed(2);
 }
 
-// --- FLAG PARSING ---
+// Flag parsing
 let length = 8;
 let useLowercase = false;
 let useUppercase = false;
@@ -128,7 +128,7 @@ const charsetSize =
 const strength = getPasswordStrength(password);
 const entropy = calculateEntropy(length, charsetSize);
 
-// --- FINAL OUTPUT ---
+// Output
 console.log(`Generated password: ${password}`);
 console.log(`Strength: ${strength}`);
 console.log(`Entropy: ${entropy} bits`);
