@@ -6,4 +6,14 @@ describe('generatePassword', () => {
         expect(password).toHaveLength(12);
 
     });
+
+     test('Password includes lowercase when lowercase flag is true', () => {
+        const { password } = generatePassword(10, true, false, false, false);
+        expect(/[a-z]/.test(password)).toBe(true);
+    });
+
+    test('Password includes uppercase when uppercase flag is true', () => {
+        const { password } = generatePassword(10, false, true, false, false);
+        expect(/[A-Z]/.test(password)).toBe(true);
+    });
 })
