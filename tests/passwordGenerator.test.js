@@ -16,4 +16,24 @@ describe('generatePassword', () => {
         const { password } = generatePassword(10, false, true, false, false);
         expect(/[A-Z]/.test(password)).toBe(true);
     });
+
+     test('Password includes numbers when numbers flag is true', () => {
+        const { password } = generatePassword(10, false, false, true, false);
+        expect(/[0-9]/.test(password)).toBe(true);
+    });
+
+    test('Password includes symbols when symbols flag is true', () => {
+        const { password } = generatePassword(10, false, false, false, true);
+        expect(/[^A-Za-z0-9]/.test(password)).toBe(true);
+    });
+
+    test('Defaults to lowercase if all flags are false', () => {
+        const { password } = generatePassword(10, false, false, false, false);
+        expect(/[a-z]/.test(password)).toBe(true);
+    });
+
+    test('Returns only valid characters from selected sets', () => {
+        const { password } = generatePassword(100, true, true, true, true);
+        expect(/^[a-zA-Z0-9!@#$%^&*()\-_=+\[\]{}|;:,.<>?]+$/.test(password)).toBe(true);
+    });
 })
